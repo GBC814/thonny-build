@@ -74,11 +74,16 @@ rm -rf $PYTHON_CURRENT/lib/python3.10/ensurepip
 rm -rf $PYTHON_CURRENT/lib/python3.10/config-3.10-darwin
 
 rm -rf $PYTHON_CURRENT/lib/python3.10/idlelib
+rm -rf $PYTHON_CURRENT/lib/python3.10/turtledemo
+rm -rf $PYTHON_CURRENT/lib/python3.10/tkinter/test
+rm -rf $PYTHON_CURRENT/lib/python3.10/sqlite3/test
 rm -rf $PYTHON_CURRENT/bin/idle3
 rm -rf $PYTHON_CURRENT/bin/idle3.10
 
 rm -rf $PYTHON_CURRENT/lib/python3.10/site-packages/pylint/test
 rm -rf $PYTHON_CURRENT/lib/python3.10/site-packages/mypy/test
+find $PYTHON_CURRENT/lib/python3.10/site-packages -name "tests" -type d -exec rm -rf {} +
+find $PYTHON_CURRENT/lib/python3.10/site-packages -name "test" -type d -exec rm -rf {} +
 
 # 递归删除所有 __pycache__
 find $PYTHON_CURRENT/lib -name '__pycache__' -type d -exec rm -rf {} +
