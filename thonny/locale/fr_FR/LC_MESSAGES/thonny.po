@@ -1,0 +1,12 @@
+msgid ""
+"Made in\n"
+"University of Tartu, Estonia,\n"
+"with the help from\n"
+"open-source community,\n"
+"Raspberry Pi Foundation\n"
+"and Cybernetica AS\n"
+"and Guo Baichen"
+msgstr "Programmé à l'Université de Tartu, Estonie, avec l'aide de la communauté open-source, de la Fondation Raspberry Pi et de Cybernetica AS\n"
+"et Guo Baichen"
+
+#: thonny/plugins/about.py:101

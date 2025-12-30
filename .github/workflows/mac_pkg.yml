@@ -1,0 +1,100 @@
+name: Build macOS PKG
+
+on:
+  push:
+    branches: [ "master", "main" ]
+    tags: [ "v*" ]
+  workflow_dispatch:
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Python 3.10
+        run: |
+          # 下载并安装官方 Python 3.10.11，这是脚本所期望的框架路径
+          curl -O https://www.python.org/ftp/python/3.10.11/python-3.10.11-macos11.pkg
+          sudo installer -pkg python-3.10.11-macos11.pkg -target /
+          
+      - name: Prepare Base Bundle
+        working-directory: packaging/mac
+        run: |
+          # 给所有脚本和 Python 文件最高执行权限
+          chmod +x *.sh *.py
+          # 准备基础包（拷贝 Python 框架）
+          ./prepare_base_bundle.sh
+
+      - name: Prepare Dist Bundle
+        working-directory: packaging/mac
+        run: |
+          # 再次确保权限
+          chmod +x *.sh *.py
+          VERSION=$(cat ../../thonny/VERSION)
+          echo "Building Thonny version $VERSION"
+          
+          # 彻底移除可能导致编译失败的旧 SDK 设置
+          sed -i '' 's/export MACOSX_DEPLOYMENT_TARGET=/#/g' prepare_dist_bundle.sh
+          sed -i '' 's/export SDKROOT=/#/g' prepare_dist_bundle.sh
+          
+          # 处理缺失的 universal_dists 目录
+          if [ ! -d "universal_dists" ]; then
+            echo "universal_dists not found, patching prepare_dist_bundle.sh to skip them"
+            sed -i '' 's/.*pip install universal_dists.*/# skipped/g' prepare_dist_bundle.sh
+          fi
+          
+          # 执行打包准备工作
+          ./prepare_dist_bundle.sh $VERSION ../requirements-regular-bundle-310.txt
+          
+          # 检查体积
+          echo "App bundle size details:"
+          du -sh build/Thonny.app
+          du -d 2 -h build/Thonny.app/Contents/Frameworks
+
+      - name: Create Installer (PKG)
+        working-directory: packaging/mac
+        run: |
+          VERSION=$(cat ../../thonny/VERSION)
+          
+          # 确保 dist 文件夹存在，防止 productbuild 报错
+          mkdir -p dist
+          
+          # 移除硬编码的签名要求
+          sed -i '' 's/--sign "$INSTALLER_SIGN_ID"//g' create_installer_from_build.sh
+          
+          # 创建 PKG
+          ./create_installer_from_build.sh "thonny" "Thonny" $VERSION
+
+      - name: Upload PKG Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thonny-${{ github.ref_name }}-macos-pkg
+          path: packaging/mac/dist/*.pkg
+
+      - name: Self-Test (Advanced Verification)
+        run: |
+          echo "Starting production-level self-test..."
+          PKG_FILE=$(ls packaging/mac/dist/*.pkg)
+          
+          # 1. 模拟用户安装
+          sudo installer -pkg "$PKG_FILE" -target /
+          echo "✅ PKG installed successfully to /Applications"
+          
+          # 2. 验证 App 结构
+          if [ ! -d "/Applications/Thonny.app" ]; then
+            echo "❌ Error: Thonny.app missing!"
+            exit 1
+          fi
+          
+          # 3. 验证 Python 环境和 Thonny 源代码
+          # 尝试在安装后的环境中导入 thonny 并打印版本
+          echo "Verifying Thonny internal source code..."
+          /Applications/Thonny.app/Contents/MacOS/Python -c "import thonny; print('🚀 Thonny ' + thonny.get_version() + ' is alive!')"
+          
+          # 4. 验证依赖路径（防止路径硬编码报错）
+          echo "Checking dynamic library links..."
+          otool -L /Applications/Thonny.app/Contents/MacOS/Python | grep "@rpath"
+          echo "✅ Library path verification passed!"

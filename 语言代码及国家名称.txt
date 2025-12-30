@@ -1,0 +1,47 @@
+Thonny 语言代码、名称与国家/地区对应清单
+
+| 语言代码 | 语言名称 | 对应国家/地区 |
+| :--- | :--- | :--- |
+| be_BY | Беларуская мова [BETA] | 白俄罗斯 (Belarus) |
+| ca_ES | Català | 西班牙 - 加泰罗尼亚 (Spain - Catalonia) |
+| cs_CZ | Čeština [BETA] | 捷克 (Czech Republic) |
+| de_DE | Deutsch | 德国 (Germany) |
+| et_EE | Eesti | 爱沙尼亚 (Estonia) |
+| en_GB | English (UK) | 英国 (United Kingdom) |
+| en_US | English (US) [default] | 美国 (United States) |
+| es_ES | Español | 西班牙 (Spain) |
+| eu_ES | Euskara [BETA] | 西班牙 - 巴斯克 (Spain - Basque) |
+| fr_FR | Français | 法国 (France) |
+| it_IT | Italiano | 意大利 (Italy) |
+| lt_LT | Lietuvių | 立陶宛 (Lithuania) |
+| hu_HU | Magyar [BETA] | 匈牙利 (Hungary) |
+| nb_NO | Norsk (Bokmål) | 挪威 (Norway - Bokmål) |
+| nn_NO | Norsk (Nynorsk) | 挪威 (Norway - Nynorsk) |
+| nl_NL | Nederlands | 荷兰 (Netherlands) |
+| pl_PL | Polski | 波兰 (Poland) |
+| pt_PT | Português (PT) | 葡萄牙 (Portugal) |
+| pt_BR | Português (BR) | 巴西 (Brazil) |
+| ro_RO | Română | 罗马尼亚 (Romania) |
+| ru_RU | Русский | 俄罗斯 (Russia) |
+| sl_SI | Slovenščina | 斯洛文尼亚 (Slovenia) |
+| sk_SK | Slovenčina | 斯洛伐克 (Slovakia) |
+| fi_FI | Suomi [BETA] | 芬兰 (Finland) |
+| sv_SE | Svenska [ALPHA] | 瑞典 (Sweden) |
+| sq_AL | Shqip [BETA] | 阿尔巴尼亚 (Albania) |
+| vi_VN | Tiếng Việt | 越南 (Vietnam) |
+| tr_TR | Türkçe [BETA] | 土耳其 (Turkey) |
+| uk_UA | Українська | 乌克兰 (Ukraine) |
+| zh_TW | 繁體中文-TW | 中国台湾 (Taiwan) |
+| zh_CN | 简体中文 | 中国 (China) |
+| zh_Hans | 简体中文 (zh-Hans) [BETA] | 中国 (China) |
+| ja_JP | 日本語 | 日本 (Japan) |
+| hy_AM | Հայերէն [BETA] | 亚美尼亚 (Armenia) |
+| fa_IR | فارسی | 伊朗 (Iran) |
+| el_GR | Ελληνικά | 希腊 (Greece) |
+| ko_KR | 한국어 [韓國語] [BETA] | 韩国 (South Korea) |
+| ar_AR | [BETA] عربي | 阿拉伯语地区 (Arabic World) |
+| ta_IN | தமிழ் [BETA] | 印度 (India) |
+| th_TH | ภาษาไทย [BETA] | 泰国 (Thailand) |
+
+生成时间: 2025-12-29
+数据来源: thonny/languages.py

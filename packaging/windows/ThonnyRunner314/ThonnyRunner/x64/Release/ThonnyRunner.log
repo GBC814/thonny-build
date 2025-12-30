@@ -1,0 +1,10 @@
+﻿  thonny.cpp
+D:\thonny-4.1.8\packaging\windows\ThonnyRunner314\ThonnyRunner\thonny.cpp(19,2): warning C4996: 'Py_IsolatedFlag': deprecated in 3.12
+D:\thonny-4.1.8\packaging\windows\ThonnyRunner314\ThonnyRunner\thonny.cpp(29,2): warning C4996: 'Py_SetProgramName': deprecated in 3.11
+D:\thonny-4.1.8\packaging\windows\ThonnyRunner314\ThonnyRunner\thonny.cpp(31,2): warning C4996: 'PySys_SetArgvEx': deprecated in 3.11
+LINK : warning LNK4075: 忽略“/INCREMENTAL”(由于“/LTCG”规范)
+  正在生成代码
+  Previous IPDB not found, fall back to full compilation.
+  All 1 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  ThonnyRunner.vcxproj -> D:\thonny-4.1.8\packaging\windows\ThonnyRunner314\x64\Release\thonny.exe
